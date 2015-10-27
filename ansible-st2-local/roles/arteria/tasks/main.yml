@@ -4,13 +4,23 @@
   tags: arteria_mailclient
 
 - include: conf.yml
-  tags: arteria_master_conf 
+  tags: arteria_master_conf
 
 - name: Pause for 1 minute until stackstorm services are up and online
   pause: minutes=1
 
 - include: register_components.yml
-  tags: arteria_register_components 
+  tags: arteria_register_components
+
+- name: Override paramiko setting (currently buggy)
+  sudo: yes
+  ini_file:
+    dest=/etc/st2/st2.conf
+    section=ssh_runner
+    option=use_paramiko_ssh_runner
+    value=False
+    backup=yes
+  tags: arteria_paramiko_override
 
 - name: Ensure api is reachable from web-ui
   sudo: yes

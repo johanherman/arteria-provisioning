@@ -1,5 +1,6 @@
 ---
 - name: Install st2 for arteria
+  remote_user: vagrant
   hosts: master
   vars:
     st2_version: 0.13.2

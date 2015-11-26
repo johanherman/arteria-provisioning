@@ -20,6 +20,8 @@
     option=use_paramiko_ssh_runner
     value=False
     backup=yes
+  notify: 
+    - restart st2
   tags: arteria_paramiko_override
 
 - name: Ensure api is reachable from web-ui

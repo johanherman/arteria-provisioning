@@ -9,9 +9,13 @@ for svc in bcl2fastq runfolder siswrap
 do
     echo "\$svc"
     echo "---"
-    source /opt/arteria/arteria-\$svc-env/bin/activate
-    pip freeze | grep "arteria\|bcl2fastq\|runfolder\|siswrap"
-    deactivate
+    if [ -f /opt/arteria/arteria-\$svc-env/bin/activate ]; then
+      source /opt/arteria/arteria-\$svc-env/bin/activate
+      pip freeze | grep "arteria\|bcl2fastq\|runfolder\|siswrap"
+      deactivate
+    else
+      echo "Not installed"
+    fi
     echo ""
 done
 EOF

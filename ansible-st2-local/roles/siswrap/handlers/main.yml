@@ -1,7 +1,4 @@
-- name: start supervisord
-  service:
-    name: supervisord
-    state: started
+---
 
 - name: restart siswrap
   supervisorctl:

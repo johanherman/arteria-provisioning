@@ -1,0 +1,10 @@
+---
+
+arteria_install_path: /opt/arteria/
+arteria_siswrap_env_root: /opt/arteria/arteria-siswrap-env
+arteria_siswrap_path: "{{ arteria_install_path }}/arteria-siswrap-env"
+arteria_siswrap_config_root: /etc/arteria/siswrap
+arteria_siswrap_app_config: "{{ arteria_siswrap_config_root }}/app.config"
+arteria_siswrap_logger_config: "{{ arteria_siswrap_config_root }}/logger.config"
+
+arteria_siswrap_run_tests: False

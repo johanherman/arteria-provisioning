@@ -22,9 +22,11 @@
   vars:
     arteria_environment: staging
   roles:
-    - arteria_node
+    - { role: arteria_node, tags: ['arteria_node'] }
+    - { role: bcl2fastq, tags: ['bcl2fastq'] }
+    - { role: siswrap, tags: ['siswrap'] }
+    - { role: runfolder, tags: ['runfolder'] }
     - sisyphus
-    - runfolder
 
 - name: Setup test remote node
   remote_user: vagrant

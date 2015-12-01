@@ -33,7 +33,7 @@
 - name: download python setup-tools
   get_url:
     url: https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.2.tar.gz
-    dest: /usr/src/
+    dest: /usr/src/setuptools-1.4.2.tar.gz
     sha256sum: 263986a60a83aba790a5bffc7d009ac88114ba4e908e5c90e453b3bf2155dbbd
 
 - name: Untar setup-tools

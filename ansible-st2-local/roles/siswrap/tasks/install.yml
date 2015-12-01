@@ -1,0 +1,38 @@
+---
+- name: select git sources
+  set_fact:
+    arteria_siswrap_sources_path: "/usr/src/arteria-siswrap"
+  when: arteria_siswrap_sources == "git"
+
+- name: select mounted sources
+  set_fact:
+    arteria_siswrap_sources_path: "/arteria/arteria-siswrap"
+  when: arteria_siswrap_sources == "mount"
+
+- name: get arteria-siswrap from git
+  git:
+    repo: "{{ arteria_siswrap_repo }}"
+    dest: /usr/src/arteria-siswrap
+    version: "{{ arteria_siswrap_version }}"
+  when: arteria_siswrap_sources == "git"
+
+- name: install arteria-siswrap requirements
+  pip:
+      requirements: "{{ arteria_siswrap_sources_path }}/requirements/dev"
+      chdir: "{{ arteria_siswrap_sources_path }}"
+      virtualenv: "{{ arteria_siswrap_env_root }}"
+      virtualenv_command: /usr/local/bin/virtualenv
+      state: present
+      executable: "{{ arteria_siswrap_env_root }}/bin/pip"
+      extra_args: "-U"
+
+- name: install arteria-siswrap
+  pip:
+      name: .
+      chdir: "{{ arteria_siswrap_sources_path }}"
+      virtualenv: "{{ arteria_siswrap_env_root }}"
+      virtualenv_command: /usr/local/bin/virtualenv
+      state: present
+      executable: "{{ arteria_siswrap_env_root }}/bin/pip"
+      extra_args: "-U"
+

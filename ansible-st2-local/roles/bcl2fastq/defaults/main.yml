@@ -1,13 +1,5 @@
 ---
 
-install_path: /opt/arteria/
-
-arteria_siswrap_env_root: /opt/arteria/arteria-siswrap-env
-arteria_siswrap_path: "{{ install_path }}/arteria-siswrap-env"
-arteria_siswrap_config_root: /etc/arteria/siswrap
-arteria_siswrap_app_config: "{{ arteria_siswrap_config_root }}/app.config"
-arteria_siswrap_logger_config: "{{ arteria_siswrap_config_root }}/logger.config"
-
 runfolder_path: /data/{{ ansible_nodename }}/runfolders
 arteria_bcl2fastq_env_root: /opt/arteria/arteria-bcl2fastq-env
 arteria_bcl2fastq_config_root: /etc/arteria/bcl2fastq/
@@ -17,4 +9,9 @@ bcl2fastq_logs_path: /var/log/bcl2fastq/
 
 # TODO: Temporary off, should be on if arteria_environment == `staging`
 arteria_bcl2fastq_run_tests: False
-arteria_siswrap_run_tests: False
+
+# By default, fetch sources from a git repo. Change this to "mount" to
+# fetch from a repo mounted at /arteria
+arteria_bcl2fastq_sources: git
+arteria_bcl2fastq_repo: https://github.com/arteria-project/arteria-bcl2fastq.git
+arteria_bcl2fastq_version: v1.0.0

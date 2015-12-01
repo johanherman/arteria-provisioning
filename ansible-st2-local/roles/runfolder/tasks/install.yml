@@ -1,24 +1,20 @@
 ---
+- name: select git sources
+  set_fact:
+    arteria_runfolder_sources_path: "/usr/src/arteria-runfolder"
+  when: arteria_runfolder_sources == "git"
 
-- name: install arteria-core for runfolder and requirements
-  pip:
-      requirements: "{{ arteria_runfolder_core_sources_path }}/requirements/dev"
-      chdir: "{{ arteria_runfolder_core_sources_path }}"
-      virtualenv: /opt/arteria/arteria-runfolder-env/
-      virtualenv_command: /usr/local/bin/virtualenv
-      state: present
-      executable: "{{ arteria_runfolder_env_root }}/bin/pip"
-      extra_args: "-U"
+- name: select mounted sources
+  set_fact:
+    arteria_runfolder_sources_path: "/arteria/arteria-runfolder"
+  when: arteria_runfolder_sources == "mount"
 
-- name: install arteria-core for runfolder
-  pip:
-      name: .
-      chdir: /usr/src/arteria-core_runfolder
-      virtualenv: "{{ arteria_runfolder_env_root }}"
-      virtualenv_command: /usr/local/bin/virtualenv
-      state: present
-      executable: "{{ arteria_runfolder_env_root }}/bin/pip"
-      extra_args: "-U"
+- name: get arteria-runfolder from git
+  git:
+    repo: "{{ arteria_runfolder_repo }}"
+    dest: /usr/src/arteria-runfolder
+    version: "{{ arteria_runfolder_version }}"
+  when: arteria_runfolder_sources == "git"
 
 - name: install arteria-runfolder requirements
   pip:

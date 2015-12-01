@@ -20,12 +20,7 @@ nc -zv stackstorm-master 9101
 # Check if all expected services are running:
 ./stackstorm-up.py stackstorm-master vagrant
 
-echo "*******************************"
-echo "* services"
-echo "*******************************"
-nc -zv testarteria1 10700
-nc -zv testarteria1 10800
-nc -zv testarteria1 10900
+source ./validate-testarteria1
 
 trap : 0
 echo "No validation errors"

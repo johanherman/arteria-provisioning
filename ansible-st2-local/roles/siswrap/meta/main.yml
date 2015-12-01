@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - { role: arteria_core }
+  - { role: arteria_core, tags: ['arteria_core'] }
 

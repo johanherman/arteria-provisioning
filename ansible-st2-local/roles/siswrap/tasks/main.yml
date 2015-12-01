@@ -3,37 +3,7 @@
 # TODO Ensure all this is versioned!
 
 # This all assumes that the sisyphus role has been run before this.
-
-- name: get arteria-siswrap from github
-  git:
-    repo: https://github.com/arteria-project/arteria-siswrap.git
-    dest: /usr/src/arteria-siswrap
-    update: yes
-
-- name: install arteria-siswrap requirements
-  pip:
-      requirements: /usr/src/arteria-siswrap/requirements/dev
-      chdir: /usr/src/arteria-siswrap
-      virtualenv: "{{arteria_siswrap_env_root}}"
-      virtualenv_command: /usr/local/bin/virtualenv
-      state: latest
-      executable: "{{ arteria_siswrap_env_root }}/bin/pip"
-      extra_args: "--no-cache-dir"
-      # FIXME: Sometimes the md5 checksum fails, seems to be fixed by removing
-      # ~root/.cache/pip. According to docs "--no-cache-dir" should make pip
-      # ignore this cache, but it doesn't seem to work via Ansible?
-  notify:
-    - restart siswrap
-
-# Install into virtualenv.
-- name: install arteria-siswrap
-  pip:
-      name: .
-      chdir: /usr/src/arteria-siswrap
-      virtualenv: "{{ arteria_siswrap_env_root }}"
-      virtualenv_command: /usr/local/bin/virtualenv
-      state: present
-      executable: "{{ arteria_siswrap_env_root }}/bin/pip"
+- include: install.yml
 
 - name: ensure /etc/arteria/siswrap conf dir exists
   file:

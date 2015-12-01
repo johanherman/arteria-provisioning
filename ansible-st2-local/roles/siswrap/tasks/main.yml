@@ -60,7 +60,7 @@
      - restart siswrap
 
 - supervisorctl:
-    name: siswrap-ws
+    name: "siswrap-ws:"
     state: restarted
     supervisorctl_path: /usr/local/bin/supervisorctl
 

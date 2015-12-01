@@ -1,0 +1,25 @@
+---
+- name: get arteria-bcl2fastq from github
+  git:
+    repo: https://github.com/arteria-project/arteria-bcl2fastq.git
+    dest: /usr/src/arteria-bcl2fastq
+    update: yes
+
+- name: install arteria-bcl2fastq requirements
+  pip:
+      requirements: /usr/src/arteria-bcl2fastq/requirements/dev
+      chdir: /usr/src/arteria-bcl2fastq
+      virtualenv: "{{ arteria_bcl2fastq_env_root }}"
+      virtualenv_command: /usr/local/bin/virtualenv
+      state: present
+      executable: "{{ arteria_bcl2fastq_env_root }}/bin/pip"
+
+- name: install arteria-bcl2fastq
+  pip:
+      name: .
+      chdir: /usr/src/arteria-bcl2fastq
+      virtualenv: "{{ arteria_bcl2fastq_env_root }}"
+      virtualenv_command: /usr/local/bin/virtualenv
+      state: present
+      executable: "{{ arteria_bcl2fastq_env_root }}/bin/pip"
+

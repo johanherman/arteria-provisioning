@@ -10,7 +10,7 @@
   tags: runfolder_install
 
 - supervisorctl:
-    name: runfolder-ws
+    name: "runfolder-ws:"
     state: restarted
     supervisorctl_path: /usr/local/bin/supervisorctl
 

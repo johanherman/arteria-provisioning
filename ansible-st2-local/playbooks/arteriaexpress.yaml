@@ -5,6 +5,7 @@
   vars:
     st2_version: 0.13.2
     st2web_version: 0.13.2
+    st2_system_user_in_sudoers: no
   roles:
     # Postgres requires that the en_US.UTF-8 locale is set - this fixes that
     - locale

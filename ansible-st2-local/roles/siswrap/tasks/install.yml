@@ -1,31 +1,38 @@
 ---
-- name: get arteria-siswrap from github
+- name: select git sources
+  set_fact:
+    arteria_siswrap_sources_path: "/usr/src/arteria-siswrap"
+  when: arteria_siswrap_sources == "git"
+
+- name: select mounted sources
+  set_fact:
+    arteria_siswrap_sources_path: "/arteria/arteria-siswrap"
+  when: arteria_siswrap_sources == "mount"
+
+- name: get arteria-siswrap from git
   git:
-    repo: https://github.com/arteria-project/arteria-siswrap.git
+    repo: "{{ arteria_siswrap_repo }}"
     dest: /usr/src/arteria-siswrap
-    update: yes
+    version: "{{ arteria_siswrap_version }}"
+  when: arteria_siswrap_sources == "git"
 
 - name: install arteria-siswrap requirements
   pip:
-      requirements: /usr/src/arteria-siswrap/requirements/dev
-      chdir: /usr/src/arteria-siswrap
-      virtualenv: "{{arteria_siswrap_env_root}}"
-      virtualenv_command: /usr/local/bin/virtualenv
-      state: latest
-      executable: "{{ arteria_siswrap_env_root }}/bin/pip"
-      extra_args: "--no-cache-dir"
-      # FIXME: Sometimes the md5 checksum fails, seems to be fixed by removing
-      # ~root/.cache/pip. According to docs "--no-cache-dir" should make pip
-      # ignore this cache, but it doesn't seem to work via Ansible?
-  notify:
-    - restart siswrap
-
-# Install into virtualenv.
-- name: install arteria-siswrap
-  pip:
-      name: .
-      chdir: /usr/src/arteria-siswrap
+      requirements: "{{ arteria_siswrap_sources_path }}/requirements/dev"
+      chdir: "{{ arteria_siswrap_sources_path }}"
       virtualenv: "{{ arteria_siswrap_env_root }}"
       virtualenv_command: /usr/local/bin/virtualenv
       state: present
       executable: "{{ arteria_siswrap_env_root }}/bin/pip"
+      extra_args: "-U"
+
+- name: install arteria-siswrap
+  pip:
+      name: .
+      chdir: "{{ arteria_siswrap_sources_path }}"
+      virtualenv: "{{ arteria_siswrap_env_root }}"
+      virtualenv_command: /usr/local/bin/virtualenv
+      state: present
+      executable: "{{ arteria_siswrap_env_root }}/bin/pip"
+      extra_args: "-U"
+

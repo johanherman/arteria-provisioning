@@ -30,7 +30,7 @@
     dest: /etc/supervisor/conf.d/bcl2fastq.conf
 
 - supervisorctl:
-    name: bcl2fastq-ws
+    name: "bcl2fastq-ws:"
     state: restarted
     supervisorctl_path: /usr/local/bin/supervisorctl
 

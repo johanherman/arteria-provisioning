@@ -1,7 +1,5 @@
 ---
 
-arteria_disable_iptables: true
-
 arteria_user: arteria
 arteria_uid: 4242
 arteria_group: arteria

@@ -60,6 +60,12 @@ Vagrant.configure(2) do |config|
     testtank.vm.synced_folder "../arteria-provisioning/", "/arteria/arteria-provisioning"
     #testtank.vm.synced_folder "/data/arteria_test_data/", "/data/testarteria1/runfolders"
 
+    # By default this box has iptables enabled on all ports
+    # since the Ansible provisioning does not handle firewall configuration
+    # at the moment we need to ensure that all services can be accessed
+    # anyway. We do this by dropping the reject all rule here:
+    config.vm.provision "shell", inline: "sudo iptables -D INPUT 5; echo 0;"
+
     testtank.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible-st2/playbooks/arteriaexpress.yaml"
       ansible.inventory_path = "ansible-st2/inventories/test_inventory"

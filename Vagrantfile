@@ -108,6 +108,7 @@ Vagrant.configure(2) do |config|
     source: "ssh_config",
     destination: vagrant_ssh + "/config"
 
+  config.vm.provision "shell", inline: "chmod og-rwx #{vagrant_ssh}/config"
   config.vm.provision "shell", inline: "ssh-keygen -y -f #{vagrant_ssh}/key > #{vagrant_ssh}/key.pub"
   config.vm.provision "shell", inline: "cat #{vagrant_ssh}/key.pub >> #{vagrant_ssh}/authorized_keys"
 

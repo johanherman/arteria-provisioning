@@ -1,0 +1,3 @@
+
+ansible-playbook --tags "$1" --private-key=./.vagrant/machines/testarteria1/virtualbox/private_key --user=vagrant --connection=ssh --limit='testarteria1' -v --inventory-file=ansible-st2/inventories/test_inventory ansible-st2/playbooks/arteriaexpress.yaml
+

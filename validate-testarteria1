@@ -1,0 +1,26 @@
+echo "*******************************"
+echo "* testarteria1"
+echo "*******************************"
+
+echo "Python packages"
+
+ssh -l vagrant -i .vagrant/machines/testarteria1/virtualbox/private_key testarteria1 << EOF
+for svc in bcl2fastq runfolder siswrap
+do
+    echo "\$svc"
+    echo "---"
+    if [ -f /opt/arteria/arteria-\$svc-env/bin/activate ]; then
+      source /opt/arteria/arteria-\$svc-env/bin/activate
+      pip freeze | grep "arteria\|bcl2fastq\|runfolder\|siswrap"
+      deactivate
+    else
+      echo "Not installed"
+    fi
+    echo ""
+done
+EOF
+
+echo "Check for ports"
+nc -zv testarteria1 10700
+nc -zv testarteria1 10800
+nc -zv testarteria1 10900

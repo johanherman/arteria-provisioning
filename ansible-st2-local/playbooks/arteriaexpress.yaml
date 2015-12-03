@@ -4,7 +4,14 @@
   hosts: master
   vars:
     st2_version: 0.13.2
+    st2_revision: 5
     st2web_version: 0.13.2
+    st2_system_user_in_sudoers: no
+    st2_system_user: arteria
+    st2_auth_username: testu
+    st2_auth_password: testp
+    postgresql_logging_collector: on
+    postgresql_log_directory: /var/log/postgresql
   roles:
     # Postgres requires that the en_US.UTF-8 locale is set - this fixes that
     - locale
@@ -22,9 +29,11 @@
   vars:
     arteria_environment: staging
   roles:
-    - arteria_node
+    - { role: arteria_node, tags: ['arteria_node'] }
+    - { role: bcl2fastq, tags: ['bcl2fastq'] }
+    - { role: siswrap, tags: ['siswrap'] }
+    - { role: runfolder, tags: ['runfolder'] }
     - sisyphus
-    - runfolder
 
 - name: Setup test remote node
   remote_user: vagrant

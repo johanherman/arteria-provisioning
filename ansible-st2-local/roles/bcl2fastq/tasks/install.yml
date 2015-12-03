@@ -1,0 +1,38 @@
+---
+- name: select git sources
+  set_fact:
+    arteria_bcl2fastq_sources_path: "/usr/src/arteria-bcl2fastq"
+  when: arteria_bcl2fastq_sources == "git"
+
+- name: select mounted sources
+  set_fact:
+    arteria_bcl2fastq_sources_path: "/arteria/arteria-bcl2fastq"
+  when: arteria_bcl2fastq_sources == "mount"
+
+- name: get arteria-bcl2fastq from git
+  git:
+    repo: "{{ arteria_bcl2fastq_repo }}"
+    dest: /usr/src/arteria-bcl2fastq
+    version: "{{ arteria_bcl2fastq_version }}"
+  when: arteria_bcl2fastq_sources == "git"
+
+- name: install arteria-bcl2fastq requirements
+  pip:
+      requirements: "{{ arteria_bcl2fastq_sources_path }}/requirements/dev"
+      chdir: "{{ arteria_bcl2fastq_sources_path }}"
+      virtualenv: "{{ arteria_bcl2fastq_env_root }}"
+      virtualenv_command: /usr/local/bin/virtualenv
+      state: present
+      executable: "{{ arteria_bcl2fastq_env_root }}/bin/pip"
+      extra_args: "-U"
+
+- name: install arteria-bcl2fastq
+  pip:
+      name: .
+      chdir: "{{ arteria_bcl2fastq_sources_path }}"
+      virtualenv: "{{ arteria_bcl2fastq_env_root }}"
+      virtualenv_command: /usr/local/bin/virtualenv
+      state: present
+      executable: "{{ arteria_bcl2fastq_env_root }}/bin/pip"
+      extra_args: "-U"
+

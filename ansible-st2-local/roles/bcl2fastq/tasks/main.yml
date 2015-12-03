@@ -1,35 +1,7 @@
 ---
+- include: install_reqs.yml
 
-#TODO Ensure all this is versioned!
-
-- name: install illumina bcl2fastq
-  yum:
-    name: http://support.illumina.com/content/dam/illumina-support/documents/downloads/software/bcl2fastq/bcl2fastq2-v2.17.1.14-Linux-x86_64.rpm
-    state: present
-
-- name: get arteria-bcl2fastq from github
-  git:
-    repo: https://github.com/arteria-project/arteria-bcl2fastq.git
-    dest: /usr/src/arteria-bcl2fastq
-    update: yes
-
-- name: install arteria-bcl2fastq requirements
-  pip:
-      requirements: /usr/src/arteria-bcl2fastq/requirements/dev
-      chdir: /usr/src/arteria-bcl2fastq
-      virtualenv: "{{ arteria_bcl2fastq_env_root }}"
-      virtualenv_command: /usr/local/bin/virtualenv
-      state: present
-      executable: "{{ arteria_bcl2fastq_env_root }}/bin/pip"
-
-- name: install arteria-bcl2fastq
-  pip:
-      name: .
-      chdir: /usr/src/arteria-bcl2fastq
-      virtualenv: "{{ arteria_bcl2fastq_env_root }}"
-      virtualenv_command: /usr/local/bin/virtualenv
-      state: present
-      executable: "{{ arteria_bcl2fastq_env_root }}/bin/pip"
+- include: install.yml
 
 - name: ensure bcl2fastq log dir exists
   file:
@@ -58,7 +30,7 @@
     dest: /etc/supervisor/conf.d/bcl2fastq.conf
 
 - supervisorctl:
-    name: bcl2fastq-ws
+    name: "bcl2fastq-ws:"
     state: restarted
     supervisorctl_path: /usr/local/bin/supervisorctl
 

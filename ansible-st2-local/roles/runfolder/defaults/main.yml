@@ -10,6 +10,4 @@ runfolder_path: /data/{{ ansible_nodename }}/runfolders
 # fetch from a repo mounted at /arteria
 arteria_runfolder_sources: git
 arteria_runfolder_repo: https://github.com/arteria-project/arteria-runfolder.git
-arteria_runfolder_version: HEAD
-arteria_runfolder_core_repo: https://github.com/arteria-project/arteria-core.git
-arteria_runfolder_core_version: HEAD
+arteria_runfolder_version: v1.0.0

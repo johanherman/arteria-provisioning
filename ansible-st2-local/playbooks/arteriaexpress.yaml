@@ -31,5 +31,6 @@
   sudo: true
   hosts: remote
   roles:
+    - arteria_common
     - sisyphus
 

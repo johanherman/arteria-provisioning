@@ -1,7 +1,7 @@
 ---
 
 
-arteria_sisyphus_user: vagrant
+arteria_sisyphus_user: arteria
 install_path: /opt/arteria/
 
 arteria_siswrap_path: "{{ install_path }}/arteria-siswrap-env"

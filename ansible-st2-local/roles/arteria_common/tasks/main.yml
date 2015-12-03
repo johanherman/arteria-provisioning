@@ -1,0 +1,27 @@
+- name: add main user group
+  group: name={{ arteria_group }} gid={{ arteria_gid }} state=present
+  sudo: true
+
+- name: add main user
+  user: name={{ arteria_user }} uid={{ arteria_uid }} group={{ arteria_group }} state=present
+  sudo: true
+
+- name: Make sure ssh dir for arteria user exists
+  file: path=/home/{{ arteria_user }}/.ssh/ state=directory  
+  sudo: true
+
+- name: Deploy SSH private key for arteria user
+  copy: src=files/arteria_key dest=/home/{{ arteria_user }}/.ssh/ owner={{ arteria_user }} group={{ arteria_user }} mode=0600 
+  sudo: true
+
+- name: Deploy SSH public key for arteria user
+  copy: src=files/arteria_key.pub dest=/home/{{ arteria_user }}/.ssh/ owner={{ arteria_user }} group={{ arteria_user }} mode=0600
+  sudo: true
+
+- name: Add key to authorized keys for arteria user
+  shell: cat /home/{{ arteria_user }}/.ssh/arteria_key.pub >> /home/{{ arteria_user }}/.ssh/authorized_keys 
+  sudo: true
+
+- name: Deploy SSH config for arteria user 
+  copy: src=files/arteria_ssh_config dest=/home/{{ arteria_user }}/.ssh/config owner={{ arteria_user }} group={{ arteria_user }} mode=0600
+  sudo: true

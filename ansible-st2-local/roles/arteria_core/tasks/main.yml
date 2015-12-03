@@ -59,12 +59,6 @@
     - virtualenv
     - supervisor
 
-- name: add main user group
-  group: name={{ arteria_group }} gid={{ arteria_gid }} state=present
-
-- name: add main user
-  user: name={{ arteria_user }} uid={{ arteria_uid }} group={{ arteria_group }} state=present
-
 - name: create supervisor directories
   file:
     path: /etc/supervisor/conf.d

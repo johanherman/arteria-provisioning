@@ -1,4 +1,4 @@
 .vagrant
 *.swp
 private_key*
-arteria_key*
+arteria_user.key*

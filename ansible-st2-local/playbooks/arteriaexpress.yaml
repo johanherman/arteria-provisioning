@@ -41,6 +41,6 @@
   sudo: true
   hosts: remote
   roles:
-    - arteria_common
+    - { role: arteria_common, tags: ['arteria_common'] }
     - sisyphus
 

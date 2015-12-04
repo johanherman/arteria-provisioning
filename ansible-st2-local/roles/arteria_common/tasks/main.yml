@@ -7,7 +7,7 @@
   sudo: true
 
 - name: Make sure ssh dir for arteria user exists
-  file: path=/home/{{ arteria_user }}/.ssh/ state=directory  
+  file: path=/home/{{ arteria_user }}/.ssh/ state=directory owner={{ arteria_user }} group={{ arteria_user }} 
   sudo: true
 
 - name: Deploy SSH private key for arteria user
@@ -19,9 +19,13 @@
   sudo: true
 
 - name: Add key to authorized keys for arteria user
-  shell: cat /home/{{ arteria_user }}/.ssh/arteria_user.key.pub >> /home/{{ arteria_user }}/.ssh/authorized_keys 
+  shell: cat /home/{{ arteria_user }}/.ssh/arteria_user.key.pub >> /home/{{ arteria_user }}/.ssh/authorized_keys && chown {{ arteria_user }} /home/{{ arteria_user }}/.ssh/authorized_keys 
   sudo: true
 
 - name: Deploy SSH config for arteria user 
   copy: src=files/arteria_user.ssh_config dest=/home/{{ arteria_user }}/.ssh/config owner={{ arteria_user }} group={{ arteria_user }} mode=0600
   sudo: true
+
+- name: Insure that all files in home dir are actually owned by the arteria group
+  shell: chgrp -R {{ arteria_group }} /home/{{ arteria_user }}
+  sudo: true 

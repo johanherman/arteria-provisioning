@@ -12,9 +12,14 @@ else
 fi 
 
 if [ ! -f 'private_key' ]; then
-  echo 'Generating ssh key'
-  ssh-keygen -f private_key -C 'arteria' -P ''
+  echo 'Generating ssh key for vagrant'
+  ssh-keygen -f private_key -C 'vagrant' -P ''
 fi
+
+if [ ! -f 'ansible-st2-local/files/arteria_key' ]; then
+  echo "Generating ssh key for arteria"
+  ssh-keygen -f ansible-st2-local/playbooks/files/arteria_user.key -C "arteria" -P ""
+fi 
 
 echo "Checking out needed arteria repos"
 

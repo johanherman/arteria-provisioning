@@ -1,0 +1,7 @@
+host *
+StrictHostKeyChecking no
+IdentityFile /home/arteria/.ssh/arteria_user.key
+UserKnownHostsFile=/dev/null
+user arteria
+LogLevel ERROR
+

@@ -14,4 +14,4 @@ arteria_bcl2fastq_run_tests: False
 # fetch from a repo mounted at /arteria
 arteria_bcl2fastq_sources: git
 arteria_bcl2fastq_repo: https://github.com/arteria-project/arteria-bcl2fastq.git
-arteria_bcl2fastq_version: v1.0.0
+arteria_bcl2fastq_version: v1.1.0

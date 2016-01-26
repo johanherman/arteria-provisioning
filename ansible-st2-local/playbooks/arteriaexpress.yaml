@@ -13,6 +13,7 @@
     mistral_db_password: ArteriaKicksAzz
     postgresql_logging_collector: on
     postgresql_log_directory: /var/log/postgresql
+    arteria_environment: staging
   roles:
     # Postgres requires that the en_US.UTF-8 locale is set - this fixes that
     - locale

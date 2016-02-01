@@ -4,16 +4,19 @@
   file:
     state: directory
     path: "{{ arteria_runfolder_config_root }}"
+    owner: "{{ arteria_user }}"
 
 - name: deploy arteria-runfolder app config
   template:
     src: runfolder_app.config.j2
     dest: "{{ arteria_runfolder_app_config }}"
+    owner: "{{ arteria_user }}"
 
 - name: deploy arteria-runfolder logger config
   template:
     src: runfolder_logger.config.j2
     dest: "{{ arteria_runfolder_logger_config }}"
+    owner: "{{ arteria_user }}"
 
 - name: deploy arteria-runfolder supervisord config
   template:

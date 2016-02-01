@@ -36,3 +36,6 @@
       executable: "{{ arteria_siswrap_env_root }}/bin/pip"
       extra_args: "-U"
 
+- name: change file owner of arteria-siswrap
+  shell: chown -R {{ arteria_user }} {{ arteria_siswrap_env_root }}
+

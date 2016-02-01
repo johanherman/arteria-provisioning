@@ -99,3 +99,10 @@
     state: directory
     path: /etc/arteria
     owner: "{{ arteria_user }}"
+
+- name: ensure /opt/arteria dir exists with proper owner
+  file: 
+    state: directory
+    path: /opt/arteria
+    owner: "{{ arteria_user }}"
+

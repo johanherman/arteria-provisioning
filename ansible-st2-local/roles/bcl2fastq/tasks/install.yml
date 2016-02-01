@@ -36,3 +36,5 @@
       executable: "{{ arteria_bcl2fastq_env_root }}/bin/pip"
       extra_args: "-U"
 
+- name: change file owner of arteria-bcl2fastq
+  shell: chown -R {{ arteria_user }} {{ arteria_bcl2fastq_env_root }}

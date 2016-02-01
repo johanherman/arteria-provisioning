@@ -36,3 +36,6 @@
       executable: "{{ arteria_runfolder_env_root }}/bin/pip"
       extra_args: "-U"
 
+- name: change file owner of arteria-runfolder
+  shell: chown -R {{ arteria_user }} {{ arteria_runfolder_env_root }}
+

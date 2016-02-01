@@ -1,7 +1,5 @@
 ---
 
-# TODO Ensure all this is versioned!
-
 # This all assumes that the sisyphus role has been run before this.
 - include: install.yml
 
@@ -9,16 +7,19 @@
   file:
     state: directory
     path: "{{ arteria_siswrap_config_root }}"
+    owner: "{{ arteria_user }}"
 
 - name: deploying arteria-siswrap app config
   template:
     src: siswrap_app.config.j2
     dest: "{{ arteria_siswrap_app_config }}"
+    owner: "{{ arteria_user }}"
 
 - name: deploying arteria-siswrap logger config
   template:
     src: siswrap_logger.config.j2
     dest: "{{ arteria_siswrap_logger_config }}"
+    owner: "{{ arteria_user }}"
   notify:
      - restart siswrap
 

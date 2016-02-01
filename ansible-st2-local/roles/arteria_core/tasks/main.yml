@@ -25,7 +25,7 @@
   unarchive: src=/usr/src/Python-2.7.10.tgz dest=/usr/src copy=no
 
 - name: compile python
-  shell: ./configure && make --quiet altinstall && touch ansible_state_completed
+  shell: umask 0022 && ./configure && make --quiet altinstall && touch ansible_state_completed
   args:
     chdir: /usr/src/Python-2.7.10
     creates: /usr/src/Python-2.7.10/ansible_state_completed
@@ -43,7 +43,7 @@
     copy: no
 
 - name: install setup-tools
-  shell: /usr/local/bin/python2.7 setup.py install && touch /usr/src/setuptools-1.4.2/ansible_state_completed
+  shell: umask 0022 && /usr/local/bin/python2.7 setup.py install && touch /usr/src/setuptools-1.4.2/ansible_state_completed
   args:
     chdir: /usr/src/setuptools-1.4.2
     creates: /usr/src/setuptools-1.4.2/ansible_state_completed
@@ -98,3 +98,11 @@
   file:
     state: directory
     path: /etc/arteria
+    owner: "{{ arteria_user }}"
+
+- name: ensure /opt/arteria dir exists with proper owner
+  file: 
+    state: directory
+    path: /opt/arteria
+    owner: "{{ arteria_user }}"
+

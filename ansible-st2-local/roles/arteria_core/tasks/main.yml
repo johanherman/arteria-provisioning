@@ -49,7 +49,7 @@
     creates: /usr/src/setuptools-1.4.2/ansible_state_completed
 
 - name: install pip
-  shell: curl -q https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py | /usr/local/bin/python2.7 -
+  shell: curl -q https://bootstrap.pypa.io/get-pip.py | /usr/local/bin/python2.7 -
 
 - name: install other packages
   pip:

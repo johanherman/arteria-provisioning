@@ -98,3 +98,4 @@
   file:
     state: directory
     path: /etc/arteria
+    owner: "{{ arteria_user }}"

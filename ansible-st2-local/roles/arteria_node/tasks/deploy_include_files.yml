@@ -1,5 +1,5 @@
 ---
 
-- copy: src=hiseq.rsync dest=/etc/arteria/misc/
-- copy: src=ngi.rsync dest=/etc/arteria/misc/
-- copy: src=summary.rsync dest=/etc/arteria/misc/
+- copy: src=hiseq.rsync dest=/etc/arteria/misc/ owner={{ arteria_user }}
+- copy: src=ngi.rsync dest=/etc/arteria/misc/ owner={{ arteria_user }}
+- copy: src=summary.rsync dest=/etc/arteria/misc/ owner={{ arteria_user }}

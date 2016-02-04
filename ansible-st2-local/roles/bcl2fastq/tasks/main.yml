@@ -13,21 +13,25 @@
   file:
     state: directory
     path: "{{ arteria_bcl2fastq_config_root}}"
+    owner: "{{ arteria_user }}"
 
 - name: place arteria-bcl2fastq config file in "{{ arteria_bcl2fastq_app_config }}"
   template:
     src: bcl2fastq_app.config.j2
     dest: "{{ arteria_bcl2fastq_app_config }}"
+    owner: "{{ arteria_user }}"
 
 - name: place arteria-bcl2fastq config file in "{{ arteria_bcl2fastq_logger_config }}"
   template:
     src: bcl2fastq_logger.config.j2
     dest: "{{ arteria_bcl2fastq_logger_config }}"
+    owner: "{{ arteria_user }}"
 
 - name: deploy arteria-bcl2fastq supervisord config
   template:
     src: supervisor_arteria_bcl2fastq.conf.j2
     dest: /etc/supervisor/conf.d/bcl2fastq.conf
+    owner: "{{ arteria_user }}"
 
 - supervisorctl:
     name: "bcl2fastq-ws:"

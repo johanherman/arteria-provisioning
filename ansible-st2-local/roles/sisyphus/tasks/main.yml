@@ -43,7 +43,7 @@
   cpanm: name=File::NFSLock
 
 - name: create sisyphus code folder
-  file: path={{ sisyphus_path }} state=directory
+  file: path={{ sisyphus_path }} state=directory owner={{ arteria_sisyphus_user }}
 
 - name: get sisyphus code
   git: repo={{ sisyphus_git_repo }} version={{ sisyphus_repo_branch }} dest={{ sisyphus_path }}/sisyphus-tmp update=yes
@@ -63,8 +63,8 @@
 - name: remove sisyphus-tmp
   file: path={{ sisyphus_path }}/sisyphus-tmp state=absent
 
-- name: ensure latest version is globally readable
-  file: state=directory path={{ sisyphus_path }}/sisyphus-{{ sisyphus_version.stdout }} mode=775 recurse=yes
+- name: ensure latest version is globally readable and owned by proper user 
+  file: state=directory path={{ sisyphus_path }}/sisyphus-{{ sisyphus_version.stdout }} mode=775 recurse=yes owner={{ arteria_sisyphus_user }}
 
 - name: setup link to sisyphus latest
   file: state=link src={{ sisyphus_path }}/sisyphus-{{ sisyphus_version.stdout }} dest={{ sisyphus_path }}/sisyphus-latest mode=775

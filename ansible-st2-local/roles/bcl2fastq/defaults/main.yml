@@ -1,6 +1,6 @@
 ---
 
-runfolder_path: /data/{{ ansible_nodename }}/runfolders
+runfolder_path: /data/{{ ansible_hostname }}/runfolders
 arteria_bcl2fastq_env_root: /opt/arteria/arteria-bcl2fastq-env
 arteria_bcl2fastq_config_root: /etc/arteria/bcl2fastq/
 arteria_bcl2fastq_app_config: "{{ arteria_bcl2fastq_config_root }}/app.config"

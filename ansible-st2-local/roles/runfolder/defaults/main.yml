@@ -4,7 +4,7 @@ arteria_runfolder_env_root: /opt/arteria/arteria-runfolder-env
 arteria_runfolder_config_root: /etc/arteria/runfolder
 arteria_runfolder_app_config: "{{ arteria_runfolder_config_root }}/app.config"
 arteria_runfolder_logger_config: "{{ arteria_runfolder_config_root }}/logger.config"
-runfolder_path: /data/{{ ansible_nodename }}/runfolders
+runfolder_path: /data/{{ ansible_hostname }}/runfolders
 
 # By default, fetch sources from a git repo. Change this to "mount" to
 # fetch from a repo mounted at /arteria

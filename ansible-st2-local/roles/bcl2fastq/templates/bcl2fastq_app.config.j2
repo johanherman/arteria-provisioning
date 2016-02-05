@@ -4,14 +4,16 @@
 bcl2fastq:
   versions:
     2.17.1:
-      binary: /usr/local/bin/bcl2fastq
+      binary: {{ arteria_bcl2fastq_bcl2fastq_install_path }}
       class_creation_function:  _get_bcl2fastq2x_runner
-    2.15.2:
-      binary: /path/to/bcl2fastq
-      class_creation_function:  _get_bcl2fastq2x_runner
-    1.8.4:
-      binary: /path/to/bcl2fastq
-      class_creation_function: _get_bcl2fastq1x_runner
+# If you wish to deploy multiple versions, you can specify them like
+# in the example below.
+#    2.15.2:
+#      binary: /path/to/bcl2fastq
+#      class_creation_function:  _get_bcl2fastq2x_runner
+#    1.8.4:
+#      binary: /path/to/bcl2fastq
+#      class_creation_function: _get_bcl2fastq1x_runner
 
 machine_type:
   HiSeq X:

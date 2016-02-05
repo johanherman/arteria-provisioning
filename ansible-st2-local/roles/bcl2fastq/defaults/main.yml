@@ -7,6 +7,9 @@ arteria_bcl2fastq_app_config: "{{ arteria_bcl2fastq_config_root }}/app.config"
 arteria_bcl2fastq_logger_config: "{{ arteria_bcl2fastq_config_root }}/logger.config"
 bcl2fastq_logs_path: /var/log/bcl2fastq/
 
+arteria_bcl2fastq_bcl2fastq_install_path: /usr/local/bin/bcl2fastq
+
+
 # TODO: Temporary off, should be on if arteria_environment == `staging`
 arteria_bcl2fastq_run_tests: False
 

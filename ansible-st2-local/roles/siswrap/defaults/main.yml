@@ -13,4 +13,4 @@ arteria_siswrap_run_tests: False
 # fetch from a repo mounted at /arteria
 arteria_siswrap_sources: git
 arteria_siswrap_repo: https://github.com/arteria-project/arteria-siswrap.git
-arteria_siswrap_version: v1.0.1
+arteria_siswrap_version: v1.0.2

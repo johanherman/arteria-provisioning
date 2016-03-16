@@ -15,7 +15,7 @@
 
 # Include full tree of some subdirs
 # This works if rsync is called with src dest, but not src/ dest
-+ /*/Demultiplexing/***
++ /*/Unaligned/***
 + /*/InterOp/***
 + /*/Sisyphus/***
 

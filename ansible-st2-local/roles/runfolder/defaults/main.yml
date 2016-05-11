@@ -10,4 +10,4 @@ runfolder_path: /data/{{ ansible_hostname }}/runfolders
 # fetch from a repo mounted at /arteria
 arteria_runfolder_sources: git
 arteria_runfolder_repo: https://github.com/arteria-project/arteria-runfolder.git
-arteria_runfolder_version: v1.0.1
+arteria_runfolder_version: v1.1.0

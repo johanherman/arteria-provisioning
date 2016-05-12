@@ -8,13 +8,14 @@
 
 # This is needed because handlers are run last, after all tasks are finished, 
 # which is obviously too late for us
-- name: Force a manual (re)start of st2 and nginx services so we can register components
-  sudo: true
-  command: "{{ item }}"
-  with_items:
-    - st2ctl reload --register-all
-    - st2ctl restart
-    - service nginx restart
+- command: /bin/true
+  notify: 
+    - restart st2
+    - Restart nginx
+  tags: arteria_register_components
+
+- name: Force a manual (re)start of st2 services so we can register components
+  meta: flush_handlers
   tags: arteria_register_components
 
 # FIXME: These steps has to be done manually for non-test systems at the moment, 
